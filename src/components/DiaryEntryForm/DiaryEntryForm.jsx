@@ -76,7 +76,7 @@ const handleSubmit = (evt) => {
                 checked={formData.isEntryPublic}
                 onChange={handleChange}
                 />
-                Do you want to make this entry public? 
+                Make entry public? 
             </label>  
         </div>
 
@@ -87,7 +87,7 @@ const handleSubmit = (evt) => {
                 checked={formData.isEntryUsernamePublic}
                 onChange={handleChange}
                 />
-                Do you want to display your username publicly? 
+                Display username publicly? 
             </label>  
         </div>
 

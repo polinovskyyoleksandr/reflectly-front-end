@@ -28,3 +28,35 @@ const create = async (FormData) => {
         console.log(err); 
     }
 }
+
+// update an entry 
+const updateDiaryEntry = async (diaryEntryId, FormData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${diaryEntryId}`, {
+            method: 'PUT', 
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`, 
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify(FormData), 
+        }); 
+        return res.json(); 
+    } catch (err) {
+        console.log(err); 
+    }
+}
+
+// delete an entry 
+const deleteDiaryEntry = async (diaryEntryId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${diaryEntryId}`, {
+            method: 'DELETE', 
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`, 
+            }
+        }); 
+        return res.json(); 
+    } catch (err) {
+        console.log(err); 
+    }
+}

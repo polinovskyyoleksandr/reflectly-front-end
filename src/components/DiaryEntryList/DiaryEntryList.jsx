@@ -1,10 +1,16 @@
-import { Link } from 'react-router'; 
-import './DiaryEntryList.css'; 
+import './DiaryEntryList.css';
+import { Link } from 'react-router';
+import { useParams } from 'react-router';
+import { index } from '../../services/diaryService';
 
 const DiaryEntryList = (props) => {
-  
+
     if (!props.entries) {
-        return <main className="diary-list-container"><h1>Loading your entries</h1></main>
+        return (
+        <main className="diary-list-container">
+            <h1>Loading your entries</h1>
+        </main>
+        ); 
     }
 
     return (

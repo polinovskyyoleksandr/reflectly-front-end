@@ -38,7 +38,8 @@ return (
                 <button id='likeButton' onClick={handleLike}> {diaryEntry.like.includes(userId) ? 'Like' : 'Unlike'} </button>
                 <p id='likeNumber'>{diaryEntry.like.lenght - 1}</p>
             </div>
-
+            <button onClick={() => props.handleDeleteHoot(hootId)}>Delete</button>
         </section>
     </main>
-)
+);
+

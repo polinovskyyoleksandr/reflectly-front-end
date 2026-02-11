@@ -30,7 +30,13 @@ const App = () => {
     const newEntry = await diaryService.create(diaryFormData);
     setEntries([newEntry, ...entries]);
     navigate(isPublic ? '/' : '/diary');
-  }
+  };
+
+  const handleDeleteEntry = async (isPublic, entryId) => {
+    const deletedEntry = await diaryService.deleteDiaryEntry(entryId);
+    setEntries(entries.filter((entry) => entry._id !== entryId ));
+    navigate(isPublic ? '/' : '/diary');
+  } //still not tested, need to add route for entryShow, finish the show page, finish delete button there, and test 
   
   return (
     <>
@@ -41,6 +47,10 @@ const App = () => {
           <Route path="/sign-in" element={<SignInForm />} />
           <Route path='/diaryEntry/new' element={<DiaryEntryForm handleAddEntry={handleAddEntry}/>} />
           <Route path='/diary' element={<DiaryEntryList entries={entries} />} />
+          <Route 
+              path='/diary/:entryId'
+              element={<DiatyEntryShow handleDeleteEntry={handleDeleteEntry}/>}
+            />
         </Routes>
     </>
   );

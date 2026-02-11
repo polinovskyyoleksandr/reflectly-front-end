@@ -1,12 +1,23 @@
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_UTL}/diaryEntry`;
 
 // show list of diary entries
-const index = async () => {
+const index = async (isPrivate) => {
     try {
         const res = await fetch(BASE_URL, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}, 
-        }); 
-        return res.json(); 
+        });
+
+        return res.json;
+
+        // const diaryList = res.json();
+        
+        // diaryList.filter((entry) => {
+        //     if (isPrivate === true) {
+        //         return entry.isEntryPublic === false;
+        //     } else {
+        //         return entry.isEntryPublic === true;
+        //     }
+        // })
     } catch (err) {
         console.log(err) 
     }

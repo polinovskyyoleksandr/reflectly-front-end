@@ -18,6 +18,7 @@ const App = () => {
   useEffect(() => {
     const fetchPrivateEntries = async () => {
     const entriesData = await diaryService.index(true);
+    console.log('entries data', entriesData); 
     
     setPrivateEntries(entriesData);
     };
@@ -36,7 +37,7 @@ const App = () => {
     <>
       <NavBar />
         <Routes>
-          <Route path='/' element={<Landing entries={publicEntries}/>}/>
+          <Route path='/' element={<DiaryEntryList entries={publicEntries}/>}/>
           <Route path='/sign-up' element={<SignUpForm />}/>
           <Route path="/sign-in" element={<SignInForm />} />
           <Route path='/diary' element={<DiaryEntryForm />} />

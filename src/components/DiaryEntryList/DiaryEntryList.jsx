@@ -11,8 +11,8 @@ const DiaryEntryList = (props) => {
             <h1>My Diary Entries</h1>
             <ul>
                 {entries.map((entry) => (
-                    <li key={entry.timestamp}> 
-                    {entry.timestamp}
+                    <li key={entry._id}> 
+                    {entry.title} 
                     </li>
                 ))}
             </ul>
@@ -20,6 +20,8 @@ const DiaryEntryList = (props) => {
     )
 }
 
+// we can display either created at / updated at timestamp 
+
+
 export default DiaryEntryList;
 
-// amend diary entry list - it should show timestamp 

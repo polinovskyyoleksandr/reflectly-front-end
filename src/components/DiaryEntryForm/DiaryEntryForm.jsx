@@ -1,33 +1,56 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
+import * as diaryService from '../../services/diaryService';
+
 const DiaryEntryForm = (props) => {
-    const [formData, setFormData] = useState({
-        title: "", 
-        reflection: "", 
-        isEntryPublic: false, 
-        isEntryUsernamePublic: false, 
-        mood: "happy", 
-        moodLvl: 5
-    }); 
+  const { entryId } = useParams;
+  console.log( entryId)
+  const [formData, setFormData] = useState({
+      title: "", 
+      reflection: "", 
+      isEntryPublic: false, 
+      isEntryUsernamePublic: false, 
+      mood: "happy", 
+      moodLvl: 5
+  }); 
 
-const handleChange = (evt) => {
+  const handleChange = (evt) => {
     const { name, value, type, checked } = evt.target; 
-
     setFormData({ ...formData, [name]: type === "checkbox" ? checked: value 
     });  
-}; 
+  }; 
 
-const handleSubmit = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault(); 
-    console.log('form data', formData);
-    props.handleAddEntry(formData.isEntryPublic, formData);
-}; 
+    if (entryId) {
+      props.handleUpdateEntry(formData.isEntryPublic, entryId, formData);
+    } else {
+      props.handleAddEntry(formData.isEntryPublic, formData);
+    }
+  };
+
+  useEffect(() => {
+    const fetchEntry = async () => {
+      const entryData = await diaryService.show(entryId);
+      setFormData(entryData);
+    };
+    if (entryId) fetchEntry();
+
+    return () => setFormData({
+      title: "", 
+      reflection: "", 
+      isEntryPublic: false, 
+      isEntryUsernamePublic: false, 
+      mood: "happy", 
+      moodLvl: 5
+    });
+  }, [entryId]);
 
  return (
     <main>
       <form onSubmit={handleSubmit}>
-        <h1> New Diary Entry </h1>
+        <h1>{entryId ? 'Edit Entry' :' New Diary Entry' }</h1>
 
         <label htmlFor="title-input">Title</label>
         <input

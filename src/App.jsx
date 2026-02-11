@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router';
+import { Routes, Route, useNavigate, useParams } from 'react-router';
 import { UserContext } from './contexts/UserContext';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
@@ -8,7 +8,7 @@ import SignInForm from './components/SignInForm/SignInForm';
 import DiaryEntryForm from './components/DiaryEntryForm/DiaryEntryForm';
 import DiaryEntryList from './components/DiaryEntryList/DiaryEntryList';
 import Community from './components/Community/Community';
-import * as diaryService from './services/diaryService'
+import * as diaryService from './services/diaryService';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -38,6 +38,12 @@ const App = () => {
     navigate(isPublic ? '/' : '/diary');
   } //still not tested, need to add route for entryShow, finish the show page, finish delete button there, and test 
   
+  const handleUpdateEntry = async (isPublic, entryId, diaryFormData) => {
+    const updatedEntry = await diaryService.updateDiaryEntry(entryId, diaryFormData);
+    setEntries(entries.map((entry) => (entryId === entry._id ? updatedEntry : entry)));
+    navigate(`/diary/${entryId}`);
+  }; //still not tested, still need to add link in show page, entryId is still always undefined.
+
   return (
     <>
       <NavBar />
@@ -47,10 +53,13 @@ const App = () => {
           <Route path="/sign-in" element={<SignInForm />} />
           <Route path='/diaryEntry/new' element={<DiaryEntryForm handleAddEntry={handleAddEntry}/>} />
           <Route path='/diary' element={<DiaryEntryList entries={entries} />} />
-          <Route 
+          {/* <Route 
               path='/diary/:entryId'
-              element={<DiatyEntryShow handleDeleteEntry={handleDeleteEntry}/>}
-            />
+              element={<DiaryEntryShow handleDeleteEntry={handleDeleteEntry}/>}
+            /> */}
+          <Route path='/diary/:entryId/edit'
+          element={<DiaryEntryForm handleUpdateEntry={handleUpdateEntry} />}
+          />
         </Routes>
     </>
   );

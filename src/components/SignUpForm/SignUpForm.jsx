@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
 
+import { UserContext } from '../../contexts/UserContext';
+
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
@@ -22,13 +25,12 @@ const SignUpForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(formData); // this line will print the form data to the console
-
     try {
-        const newUser = signUp(formData);
-        console.log(newUser);
+        const newUser = await signUp(formData);
+        setUser(newUser);
+        navigate('/');
     } catch (error) {
-        setMessage(err.message);
+        setMessage(error.message);
     }
   };
 

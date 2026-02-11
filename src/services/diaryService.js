@@ -7,17 +7,15 @@ const index = async (isPrivate) => {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}, 
         });
 
-        return res.json;
-
-        // const diaryList = res.json();
+        const diaryList = res.json();
         
-        // diaryList.filter((entry) => {
-        //     if (isPrivate === true) {
-        //         return entry.isEntryPublic === false;
-        //     } else {
-        //         return entry.isEntryPublic === true;
-        //     }
-        // })
+        diaryList.filter((entry) => {
+            if (isPrivate === true) {
+                return entry.isEntryPublic === false;
+            } else {
+                return entry.isEntryPublic === true;
+            }
+        })
     } catch (err) {
         console.log(err) 
     }

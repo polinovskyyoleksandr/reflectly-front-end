@@ -1,9 +1,10 @@
-import './DiaryEntryList.css'; 
+import './DiaryEntryList.css';
+import { Link } from 'react-router';
+import { useParams } from 'react-router';
+import { index } from '../../services/diaryService';
 
 const DiaryEntryList = (props) => {
-    const entries = props.entries || [
-
-    ]
+    const entries = props.entries;
 
     return (
         <main>

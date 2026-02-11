@@ -1,4 +1,5 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
+import { useParams } from 'react-router';
 
 const DiaryEntryForm = (props) => {
     const [formData, setFormData] = useState({

@@ -1,6 +1,10 @@
 import { useState } from 'react'; 
+import { useNavigate} from 'react-router'; 
+import * as diaryEntryService from '../../services/diaryEntryService'; 
 
 const DiaryEntryForm = (props) => {
+  const navigate = useNavigate(); 
+
     const [formData, setFormData] = useState({
         title: "", 
         reflection: "", 
@@ -17,9 +21,15 @@ const handleChange = (evt) => {
     });  
 }; 
 
-const handleSubmit = (evt) => {
+const handleSubmit = async (evt) => {
     evt.preventDefault(); 
+    
+    const newEntry = await diaryEntryService.create(formData); 
     console.log('form data', formData)
+
+    if (newEntry) {
+      navigate('/diary-entries'); 
+    }
 }; 
 
  return (

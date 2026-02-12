@@ -1,4 +1,4 @@
-import './DiaryEntryList.css';
+
 import { Link } from 'react-router';
 import { useLocation, } from 'react-router';
 import { index } from '../../services/diaryService';

@@ -1,0 +1,88 @@
+.DiaryEntryForm {
+  display: flex; 
+  justify-content: center;
+  align-items: flex-start; 
+  min-height: 100vh; 
+  padding: 40px 20px; 
+}
+
+.submit-Form {
+    background-color: #ffffff; 
+    width: 100%; 
+    max-width: 500px; 
+    padding: 2.5rem; 
+    border-radius: 12px; 
+    border: 3px solid #814256; 
+    display: flex; 
+    flex-direction: column;
+    gap: 1.5rem; 
+}
+
+.timestampBox {
+    border: 1px dashed #814256; 
+    padding: 8px; 
+    text-align: center;
+    background-color: #fcfaf8;
+    border-radius: 4px;
+}
+
+.dateTimeText {
+    font-size: 0.8rem; 
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #814256; 
+}
+
+.formTitle {
+    color: #814256; 
+    text-align: center;
+    margin: 0;
+}
+
+.input, .inputGroup {
+    display: flex; 
+    flex-direction: column;
+    gap: 0.5rem; 
+}
+
+.label {
+    font-weight: 700;
+    font-size: 0.85rem; 
+    color: #7d7065; ;
+}
+
+.textInput, .selectInput, .numberInput, .textArea {
+    padding: 0.8rem; 
+    border: 1px solid #e0d5c8; 
+    border-radius: 6px;
+    font-size: 1rem; 
+    background-color: #fff; 
+}
+
+.row {
+    display: grid; 
+    grid-template-columns: 1.5fr 1fr; 
+    gap: 1rem;
+}
+
+.checkboxContainer { 
+    display: flex; 
+    flex-direction: column;
+    gap: 0.5rem; 
+}
+
+.checkboxLabel {
+    display: flex; 
+    align-items: center;
+    gap: 10px; 
+    font-size: 0.9rem; ;
+}
+
+.submitBtn {
+    background-color: #814256;
+    color: #f2e9e1; 
+    border: none; 
+    padding: 1rem; 
+    border-radius: 6px; 
+    font-weight: 700;
+}

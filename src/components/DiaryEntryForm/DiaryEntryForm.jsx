@@ -1,3 +1,4 @@
+import styles from './DiaryEntryForm.module.css';
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
 import DiaryEntryList from '../DiaryEntryList/DiaryEntryList';
@@ -6,7 +7,7 @@ import { UserContext } from '../../contexts/UserContext';
 import * as diaryService from '../../services/diaryService';
 
 const DiaryEntryForm = (props) => {
-  const { entryId } = useParams;
+  const { entryId } = useParams();
   console.log( entryId)
   const [formData, setFormData] = useState({
       title: "", 
@@ -50,30 +51,39 @@ const DiaryEntryForm = (props) => {
   }, [entryId]);
 
  return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <h1>{entryId ? 'Edit Entry' :' New Diary Entry' }</h1>
+    <main className={styles.DiaryEntryForm}>
+      <form onSubmit={handleSubmit} className={styles.submitForm}>
+        <h1 className={styles.formTitle}>{entryId ? 'Edit Entry' :' New Diary Entry' }</h1>
 
-        <label htmlFor="title-input">Title</label>
+      <div className={styles.input}>
+        <label htmlFor="title-input" className={styles.label}>Title</label>
         <input
+          className={styles.textInput}
           type="text"
           name="title"
           id="title-input"
           value={formData.title}
           onChange={handleChange}
         />
+      </div>
 
-        <label htmlFor="reflection-input">Reflections</label> 
+      <div className={styles.input}>
+        <label htmlFor="reflection-input" className={styles.label}>Reflections</label> 
         <input
+        className={styles.textInput}
           type="text"
           name="reflection"
           id="reflection-input"
           value={formData.reflection}
           onChange={handleChange}
         />
+      </div>
 
-        <label htmlFor="mood">What is your current mood?</label>
+      <div className={styles.row}>
+        <div className={styles.inputGroup}>
+        <label htmlFor="mood" className={styles.label}>What is your current mood?</label>
         <select
+          className={styles.selectInput}
           required
           name="mood"
           id="mood-input"
@@ -84,9 +94,12 @@ const DiaryEntryForm = (props) => {
           <option value="sad">Sad</option>
           <option value="bored">Bored</option>
         </select>
+      </div>
 
+      <div className={styles.input}>
         <label htmlFor="moodLvl">What is the intensity of your current mood?</label>
         <input 
+            className={styles.numberInput}
             type="number"
             name="moodLvl"
             id="moodLvl"
@@ -95,10 +108,13 @@ const DiaryEntryForm = (props) => {
             value = {formData.moodLvl} 
             onChange={handleChange} 
         />
+        </div>
+      </div>
 
-        <div>
-            <label>
-                <input type="checkbox" 
+        <div className={styles.checkboxGroup}>
+            <label className={styles.checkboxLabel}>
+                <input 
+                type="checkbox" 
                 name="isEntryPublic" 
                 checked={formData.isEntryPublic}
                 onChange={handleChange}
@@ -107,9 +123,10 @@ const DiaryEntryForm = (props) => {
             </label>  
         </div>
 
-        <div>
-            <label>
-                <input type="checkbox" 
+        <div className={styles.checkboxGroup}>
+            <label className={styles.checkboxLabel}>
+                <input 
+                type="checkbox" 
                 name="isEntryUsernamePublic" 
                 checked={formData.isEntryUsernamePublic}
                 onChange={handleChange}
@@ -118,7 +135,7 @@ const DiaryEntryForm = (props) => {
             </label>  
         </div>
 
-        <button type="submit">Create Entry</button>
+        <button type="submit" className={styles.submitBtn}>Create Entry</button>
     
       </form>
       

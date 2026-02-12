@@ -1,4 +1,4 @@
-import styles from './AuthForm.module.css'; 
+import styles from '../AuthForm.module.css'
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -65,7 +65,7 @@ const SignInForm = () => {
             className={styles.inputField}
           />
         </div>
-        
+
         <div className={styles.buttonGroup}>
           <button className={styles.submitBtn}>Sign In</button>
           <button 

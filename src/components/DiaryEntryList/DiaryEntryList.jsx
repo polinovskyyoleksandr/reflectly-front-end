@@ -7,8 +7,6 @@ const DiaryEntryList = (props) => {
     const entries = props.entries;
     const location = useLocation();
 
-    console.log(entries);
-
     const publicEntries = entries.filter((entry) => {
         return entry.isEntryPublic === true;
     });
@@ -25,20 +23,24 @@ const DiaryEntryList = (props) => {
                     <h1>Community Entries</h1>
                     <ul>
                         {publicEntries.map((entry) => (
-                            <li key={entry._id}> 
-                            {`${new Date(entry.createdAt).toLocaleDateString()}`} 
-                            </li>
+                            <Link key={entry._id} to={`/diary/${entry._id}`}>
+                                <li key={entry._id}> 
+                                {`${new Date(entry.createdAt).toLocaleDateString()}`} 
+                                </li>
+                            </Link>
                         ))}
                     </ul>
                 </section>
-            ) :(
+            ) : (
                 <section>
                     <h1>My Diary Entries</h1>
                     <ul>
                         {privateEntries.map((entry) => (
-                            <li key={entry._id}> 
-                            {`${new Date(entry.createdAt).toLocaleDateString()}`} 
-                            </li>
+                           <Link key={entry._id} to={`/diary/${entry._id}`}>
+                                <li key={entry._id}> 
+                                {`${new Date(entry.createdAt).toLocaleDateString()}`} 
+                                </li>
+                            </Link>
                         ))}
                     </ul>
                 </section>

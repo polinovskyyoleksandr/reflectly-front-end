@@ -9,6 +9,7 @@ import DiaryEntryForm from './components/DiaryEntryForm/DiaryEntryForm';
 import DiaryEntryList from './components/DiaryEntryList/DiaryEntryList';
 import * as diaryService from './services/diaryService'
 import Landing from './components/Landing/Landing';
+import DiaryEntryShow from './components/DiaryEntryShow/DiaryEntryShow';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -38,7 +39,7 @@ const App = () => {
     navigate(isPublic ? '/' : '/diary');
   } //still not tested, need to add route for entryShow, finish the show page, finish delete button there, and test 
   
-  const handleUpdateEntry = async (isPublic, entryId, diaryFormData) => {
+  const handleUpdateEntry = async ( entryId, diaryFormData) => {
     const updatedEntry = await diaryService.updateDiaryEntry(entryId, diaryFormData);
     setEntries(entries.map((entry) => (entryId === entry._id ? updatedEntry : entry)));
     navigate(`/diary/${entryId}`);
@@ -57,6 +58,7 @@ const App = () => {
             }/>
           <Route path='/sign-up' element={<SignUpForm />}/>
           <Route path="/sign-in" element={<SignInForm />} />
+          <Route path='/diary/:entryId' element={<DiaryEntryShow handleDeleteEntry={handleDeleteEntry} />} />
           <Route path='/diary' 
           element={
               <>

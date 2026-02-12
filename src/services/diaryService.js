@@ -30,7 +30,13 @@ const show = async (diaryEntryId) => {
         const res = await fetch(`${BASE_URL}/${diaryEntryId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}, 
         }); 
-        return res.json(); 
+            
+        // console.log('checking diary entry data', data);
+        const data = await res.json();
+        // console.log('checking diary entry data', data);
+
+        return data; 
+        
     } catch (err) {
         console.log(err)
     }

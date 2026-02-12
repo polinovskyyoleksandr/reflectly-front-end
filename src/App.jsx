@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router';
+import { Routes, Route, useNavigate, useParams } from 'react-router';
 import { UserContext } from './contexts/UserContext';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
@@ -12,27 +12,38 @@ import Landing from './components/Landing/Landing';
 
 const App = () => {
   const { user } = useContext(UserContext);
-  const [publicEntries, setPublicEntries] = useState([]);
-  const [privateEntries, setPrivateEntries] = useState([]);
+  const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    const fetchPrivateEntries = async () => {
-    const entriesData = await diaryService.index(true);
+    const fetchEntries = async () => {
+    const entriesData = await diaryService.index();
     console.log('entries data', entriesData); 
     
-    setPrivateEntries(entriesData);
+    setEntries(entriesData);
     };
-    fetchPrivateEntries();
-
-    const fetchPublicEntries = async () => {
-    const entriesData = await diaryService.index();
-    
-    setPublicEntries(entriesData);
-    };
-    fetchPublicEntries();
+    fetchEntries();
   }, [user]);
 
+  const navigate = useNavigate();
+
+  const handleAddEntry = async (isPublic, diaryFormData) => {
+    const newEntry = await diaryService.create(diaryFormData);
+    setEntries([newEntry, ...entries]);
+    navigate(isPublic ? '/' : '/diary');
+  };
+
+  const handleDeleteEntry = async (isPublic, entryId) => {
+    const deletedEntry = await diaryService.deleteDiaryEntry(entryId);
+    setEntries(entries.filter((entry) => entry._id !== entryId ));
+    navigate(isPublic ? '/' : '/diary');
+  } //still not tested, need to add route for entryShow, finish the show page, finish delete button there, and test 
   
+  const handleUpdateEntry = async (isPublic, entryId, diaryFormData) => {
+    const updatedEntry = await diaryService.updateDiaryEntry(entryId, diaryFormData);
+    setEntries(entries.map((entry) => (entryId === entry._id ? updatedEntry : entry)));
+    navigate(`/diary/${entryId}`);
+  }; //still not tested, still need to add link in show page, entryId is still always undefined.
+
   return (
     <>
       <NavBar />

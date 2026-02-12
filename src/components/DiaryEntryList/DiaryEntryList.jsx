@@ -1,21 +1,46 @@
 import './DiaryEntryList.css';
 import { Link } from 'react-router';
-import { useParams } from 'react-router';
+import { useLocation, } from 'react-router';
 import { index } from '../../services/diaryService';
 
 const DiaryEntryList = (props) => {
     const entries = props.entries;
-    console.log(entries);
+    const location = useLocation();
+
+    const publicEntries = entries.filter((entry) => {
+        return entry.isEntryPublic === true;
+    });
+
+    const privateEntries = entries.filter((entry) => {
+        return entry.isEntryPublic === false;
+    });
+    console.log('public:',publicEntries);
+    console.log('private:',privateEntries);
     return (
         <main>
-            <h1>My Diary Entries</h1>
-            <ul>
-                {entries.map((entry) => (
-                    <li key={entry._id}> 
-                    {entry.title} 
-                    </li>
-                ))}
-            </ul>
+            {location.pathname === "/" ? (
+                <section>
+                    <h1>Community Entries</h1>
+                    <ul>
+                        {publicEntries.map((entry) => (
+                            <li key={entry._id}> 
+                            {`${new Date(entry.createdAt).toLocaleDateString()}`} 
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            ) :(
+                <section>
+                    <h1>My Diary Entries</h1>
+                    <ul>
+                        {privateEntries.map((entry) => (
+                            <li key={entry._id}> 
+                            {`${new Date(entry.createdAt).toLocaleDateString()}`} 
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
         </main>
     )
 }

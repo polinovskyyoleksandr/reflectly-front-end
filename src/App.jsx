@@ -52,7 +52,7 @@ const App = () => {
             element={
               <>
                 <Landing />
-                <DiaryEntryList entries={publicEntries}/>
+                <DiaryEntryList entries={entries}/>
               </>
             }/>
           <Route path='/sign-up' element={<SignUpForm />}/>
@@ -60,7 +60,7 @@ const App = () => {
           <Route path='/diary' 
           element={
               <>
-                <DiaryEntryList entries={privateEntries} />
+                <DiaryEntryList entries={entries} />
                 <DiaryEntryForm />
               </>
           } />

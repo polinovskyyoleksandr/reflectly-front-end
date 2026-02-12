@@ -15,25 +15,6 @@ const DiaryEntryForm = (props) => {
   
   const { user } = useContext(UserContext);
 
-  const [publicEntries, setPublicEntries] = useState([]);
-  const [privateEntries, setPrivateEntries] = useState([]);
-
-  useEffect(() => {
-    const fetchPrivateEntries = async () => {
-    const entriesData = await diaryService.index(true);
-    
-    setPrivateEntries(entriesData);
-    };
-    fetchPrivateEntries();
-
-    const fetchPublicEntries = async () => {
-    const entriesData = await diaryService.index();
-    
-    setPublicEntries(entriesData);
-    };
-    fetchPublicEntries();
-  }, [user]);
-
 const handleChange = (evt) => {
     const { name, value, type, checked } = evt.target; 
 

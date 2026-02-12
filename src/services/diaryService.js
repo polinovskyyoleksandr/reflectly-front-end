@@ -3,10 +3,18 @@ const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/diaryEntry`;
 // show list of diary entries - update with an if statement and send a different fetch request
 // if token exists send with headers otherwise send as is 
 const index = async () => {
+    const token = localStorage.getItem('token');
+
+    const options = token
+        ? {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+        : {};
+
     try {
-        const res = await fetch(BASE_URL, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}, 
-        });
+        const res = await fetch(`${BASE_URL}`, options);
 
         const data = await res.json();
         

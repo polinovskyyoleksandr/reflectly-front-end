@@ -1,3 +1,4 @@
+import styles from './AuthForm.module.css'; 
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
@@ -39,13 +40,15 @@ const SignUpForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
-      <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='username'>Username:</label>
+    <main className={styles.authContainer}>
+      <form onSubmit={handleSubmit} className={styles.authCard}>
+      <h1 className={styles.title}>Sign Up</h1>
+      <p className={styles.message}>{message}</p>
+
+        <div className={styles.inputGroup}>
+          <label htmlFor='username' className={styles.label}>Username:</label>
           <input
+            className={styles.inputField}
             type='text'
             id='name'
             value={username}
@@ -54,9 +57,11 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
+
+        <div className={styles.inputGroup}>
+          <label htmlFor='password' className={styles.label}>Password:</label>
           <input
+            className={styles.inputField}
             type='password'
             id='password'
             value={password}
@@ -65,9 +70,11 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor='confirm'>Confirm Password:</label>
+
+        <div className={styles.inputGroup}>
+          <label htmlFor='confirm' className={styles.label}>Confirm Password:</label>
           <input
+            className={styles.inputGroup}
             type='password'
             id='confirm'
             value={passwordConf}
@@ -76,9 +83,11 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
-            <label htmlFor="displayName">Display Name:</label>
+
+        <div className={styles.inputGroup}>
+            <label htmlFor="displayName" className={styles.label}>Display Name:</label>
             <input 
+            className={styles.inputField}
             type="text" 
             name="displayName" 
             id="displayName"
@@ -86,18 +95,30 @@ const SignUpForm = () => {
             onChange={handleChange}
             />
         </div>
-        <div>
-            <label htmlFor="email">Email:</label>
-            <input type="email"
+
+        <div className={styles.inputGroup}>
+            <label htmlFor="email" className={styles.label}>Email:</label>
+            <input 
+            className={styles.inputField}
+            type="email"
             name='email'
             id='email'
             value={email}
             onChange={handleChange} 
             />
         </div>
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+
+        <div className={styles.buttonGroup}>
+          <button className={styles.submitBtn} disabled={isFormInvalid()}>
+            Sign Up
+            </button>
+          <button 
+          type="button"
+          className={styles.cancelBtn}
+          onClick={() => navigate('/')}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </main>

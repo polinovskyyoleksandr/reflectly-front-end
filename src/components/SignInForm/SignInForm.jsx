@@ -1,3 +1,4 @@
+import styles from './AuthForm.module.css'; 
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -32,12 +33,13 @@ const SignInForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign In</h1>
-      <p>{message}</p>
-      <form autoComplete='off' onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='username'>Username:</label>
+    <main className={styles.authContainer}>
+      <form autoComplete='off' onSubmit={handleSubmit} className={styles.authCard}>
+      <h1 className={styles.title}>Sign In</h1>
+      <p className={styles.message}>{message}</p>
+
+        <div className={styles.inputGroup}>
+          <label htmlFor='username' className={styles.label}>Username:</label>
           <input
             type='text'
             autoComplete='off'
@@ -46,10 +48,12 @@ const SignInForm = () => {
             name='username'
             onChange={handleChange}
             required
+            className={styles.inputField}
           />
         </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
+
+        <div className={styles.inputGroup}>
+          <label htmlFor='password' className={styles.label}>Password:</label>
           <input
             type='password'
             autoComplete='off'
@@ -58,11 +62,19 @@ const SignInForm = () => {
             name='password'
             onChange={handleChange}
             required
+            className={styles.inputField}
           />
         </div>
-        <div>
-          <button>Sign In</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+        
+        <div className={styles.buttonGroup}>
+          <button className={styles.submitBtn}>Sign In</button>
+          <button 
+          type="button"
+          className={styles.cancelBtn}
+          onClick={() => navigate('/')}
+          >
+          Cancel
+          </button>
         </div>
       </form>
     </main>

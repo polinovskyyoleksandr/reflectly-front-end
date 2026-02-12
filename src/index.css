@@ -1,4 +1,4 @@
-/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quattrocento&family=Shrikhand&display=swap');
 
 * {
   box-sizing: border-box;
@@ -10,7 +10,7 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: #f2e9e1;
-  font-family: sans-serif;
+  font-family: 'Quattrocento', sans-serif;
 }
 
 body {

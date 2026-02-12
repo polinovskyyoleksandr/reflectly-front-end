@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
+import DiaryEntryList from '../DiaryEntryList/DiaryEntryList';
+import { UserContext } from '../../contexts/UserContext';
 
 const DiaryEntryForm = (props) => {
     const [formData, setFormData] = useState({
@@ -10,6 +12,8 @@ const DiaryEntryForm = (props) => {
         mood: "happy", 
         moodLvl: 5
     }); 
+  
+  const { user } = useContext(UserContext);
 
 const handleChange = (evt) => {
     const { name, value, type, checked } = evt.target; 
@@ -95,6 +99,7 @@ const handleSubmit = (evt) => {
         <button type="submit">Create Entry</button>
     
       </form>
+      
     </main>
   );
 };

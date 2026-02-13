@@ -9,6 +9,7 @@ import DiaryEntryForm from './components/DiaryEntryForm/DiaryEntryForm';
 import DiaryEntryList from './components/DiaryEntryList/DiaryEntryList';
 import * as diaryService from './services/diaryService'
 import Landing from './components/Landing/Landing';
+import DiaryEntryShow from './components/DiaryEntryShow/DiaryEntryShow';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -17,7 +18,7 @@ const App = () => {
   useEffect(() => {
     const fetchEntries = async () => {
     const entriesData = await diaryService.index();
-    console.log('entries data', entriesData); 
+    // console.log('entries data', entriesData); 
     
     setEntries(entriesData);
     };
@@ -35,38 +36,58 @@ const App = () => {
   const handleDeleteEntry = async (isPublic, entryId) => {
     const deletedEntry = await diaryService.deleteDiaryEntry(entryId);
     setEntries(entries.filter((entry) => entry._id !== entryId ));
-    navigate(isPublic ? '/' : '/diary');
-  } //still not tested, need to add route for entryShow, finish the show page, finish delete button there, and test 
+    // navigate(isPublic ? '/' : '/diary');
+  };
   
-  const handleUpdateEntry = async (isPublic, entryId, diaryFormData) => {
+  const handleUpdateEntry = async ( entryId, diaryFormData) => {
     const updatedEntry = await diaryService.updateDiaryEntry(entryId, diaryFormData);
     setEntries(entries.map((entry) => (entryId === entry._id ? updatedEntry : entry)));
     navigate(`/diary/${entryId}`);
-  }; //still not tested, still need to add link in show page, entryId is still always undefined.
+  };
 
   return (
     <>
       <NavBar />
-        <Routes>
-          <Route path='/' 
-            element={
+      <Routes>
+        <Route path='/' element={
               <>
                 <Landing />
                 <DiaryEntryList entries={entries}/>
               </>
             }/>
+        {user ? ( 
+          <>
+              <Route path='/diary' element={
+                <>
+                  <DiaryEntryList entries={entries} />
+                  <DiaryEntryForm handleAddEntry={handleAddEntry}/>
+                </>
+              } />
+
+              <Route path='/diary/:entryId' element={
+                <>
+                    <DiaryEntryList entries={entries} />
+                    <DiaryEntryShow handleDeleteEntry={handleDeleteEntry} />
+                </>
+              }/>
+
+
+              <Route path='/diary/:entryId/edit' element={
+                <>
+                  <DiaryEntryList entries={entries} />
+                  <DiaryEntryForm handleUpdateEntry={handleUpdateEntry}/>
+                </>
+              }/>
+          </>
+        ) : (
+        <>
           <Route path='/sign-up' element={<SignUpForm />}/>
           <Route path="/sign-in" element={<SignInForm />} />
-          <Route path='/diary' 
-          element={
-              <>
-                <DiaryEntryList entries={entries} />
-                <DiaryEntryForm handleAddEntry={handleAddEntry}/>
-              </>
-          } />
-        </Routes>
+        </>
+        )}
+      </Routes>
     </>
   );
 };
 
-export default App
+export default App; 

@@ -58,7 +58,23 @@ return (
                 <button onClick={handleDelete}>Delete</button>
             </div>
 )}
+        </section>
+        <hr />
 
+        <section>
+            <h2>Comments</h2>
+            <Commentform handleAdddComment={handleAddComment} />
+            {!diaryEntry.comments?.length && <p>There are no comments</p>}
+            {diaryEntry.comments?.map((comment) => (
+                <article key={comment._id}>
+                    <header>
+                        <p>
+                            {comment.author?.username || 'Unknown User'} posted on {new Date(comment.createdAt).toLocaleDateString()}
+                        </p>
+                </header>
+                <p>{comment.text}</p>
+                </article>
+            ))}
         </section>
     </main>
 )}

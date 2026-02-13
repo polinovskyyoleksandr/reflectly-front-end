@@ -1,16 +1,24 @@
-# React + Vite
+# Reflectly 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Reflectly is an app that enables users to track their mental health
 
-Currently, two official plugins are available:
+Background and Information 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+As a signed in user, you may: 
+*record your moods in a private diary, including reflections. 
+*post your diaries to a public community, or keep these private. 
+*interact with other diaries and post comments. 
 
-## React Compiler
+If you are not signed in, you may still view the community page, however you cannot make any diary entries. 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Technologies Used: 
+*MONGO DB
+*Express.js
+*React
+*Node.js
 
-## Expanding the ESLint configuration
+Next Steps: 
+*As a stretch project, we'd look to have an additional model for 'Moods'. 
+*Users would be able to add their own moods and keep these as a log within their account. 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+

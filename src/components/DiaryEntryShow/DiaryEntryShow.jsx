@@ -4,6 +4,7 @@ import * as diaryService from '../../services/diaryService'
 import { UserContext } from "../../contexts/UserContext"
 import DiaryEntryForm from "../DiaryEntryForm/DiaryEntryForm"
 import CommentsForm from "../CommentsForm/CommentsForm"
+import styles from './DiaryEntryShow.module.css'
 
 const DiaryEntryShow = (props) => {
     const [diaryEntry, setDiaryEntry] = useState(null)
@@ -54,9 +55,9 @@ const DiaryEntryShow = (props) => {
                     <p id='likeNumber'>{diaryEntry?.diaryEntry.like?.length}</p>
                 </div>
                 {user._id === diaryEntry?.diaryEntry.owner && (
-                    <div className="actions">
-                        <Link to={`/diary/${entryId}/edit`}>Edit</Link>
-                        <button onClick={() => props.handleDeleteEntry(diaryEntry?.diaryEntry.isEntryPublic, entryId)}>Delete</button>
+                    <div className={styles.actions}>
+                        <button className={styles.editBtn}><Link to={`/diary/${entryId}/edit`}>Edit</Link></button>
+                        <button className={styles.deleteBtn} onClick={() => props.handleDeleteEntry(diaryEntry?.diaryEntry.isEntryPublic, entryId)}>Delete</button>
                     </div>
                 )}
             </section>

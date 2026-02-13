@@ -1,0 +1,16 @@
+.actions {
+display: flex;
+flex-direction: row;
+gap: 10px;
+}
+
+.editBtn, .deleteBtn {
+    width: 100px;
+    background-color: #814256;
+    color: #f2e9e1; 
+    border: none; 
+    padding: 1rem; 
+    border-radius: 8px; 
+    font-weight: 700;
+    margin-top: 1rem; 
+}

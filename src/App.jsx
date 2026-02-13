@@ -71,16 +71,26 @@ const App = () => {
 
               <Route path='/diary/:entryId' element={
                 <>
+                <section className='handleedit'>
+                <div className='showlist'>
                     <DiaryEntryList entries={entries} />
+                </div>
+                <div className='formedit'>
                     <DiaryEntryShow handleDeleteEntry={handleDeleteEntry} />
+                </div>
+                </section>
                 </>
               }/>
 
 
               <Route path='/diary/:entryId/edit' element={
                 <>
+                <div className='showlist'>
                   <DiaryEntryList entries={entries} />
+                </div>
+                <div className='formedit'>
                   <DiaryEntryForm handleUpdateEntry={handleUpdateEntry}/>
+                </div>
                 </>
               }/>
           </>

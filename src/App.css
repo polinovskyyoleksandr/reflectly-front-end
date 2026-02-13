@@ -2,11 +2,27 @@
     display: flex;
 }
 
+.handleedit {
+    display: flex;
+}
+
 .form {
     width: 100%;
 }
 
+.formedit {
+    margin-left: 20px;
+}
+
 .list {
+    background-color: #814256;
+    border-radius: 12px;
+    margin-left: 20px;
+    margin-top: 20px;
+    height: fit-content;
+}
+
+.showlist {
     background-color: #814256;
     border-radius: 12px;
     margin-left: 20px;
